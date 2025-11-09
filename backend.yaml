@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bank-api-backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: bank-api
+  template:
+    metadata:
+      labels:
+        app: bank-api
+    spec:
+      containers:
+        - name: bank-api-container
+          image: northamerica-northeast1-docker.pkg.dev/gcp-class-16/lucas-bank-gke-repo/backend:latest
+          ports:
+            - containerPort: 5000
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: lucas-bank-backend-service
+spec:
+  type: LoadBalancer
+  selector:
+    app: bank-api
+  ports:
+    - protocol: TCP
+      port: 5000
+      targetPort: 5000

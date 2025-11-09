@@ -35,7 +35,7 @@ RUN mkdir -p /app/db && chown -R appuser:appgroup /app
 USER appuser
 
 # Expose the port the app runs on
-EXPOSE 8080
+EXPOSE 5000
 
 # Health check
 HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
